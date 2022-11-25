@@ -21,15 +21,11 @@ public class CandidateDaoImpl implements CandidateMapper {
     @Override
     public List<Candidate> findAll() {
         String sql = "select * from candidate";
-        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<Candidate>(Candidate.class));
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Candidate.class));
     }
 
     @Override
-    public boolean isSeatExisted(String seatID){
-        return false;
-    }
-    @Override
-    public Candidate findBySeatId(String seatID) {
+    public Candidate findEntityBySeatId(String seatID) {
         String sql = "select * from candidate where seatID=?";
         Object[] params = new Object[]{seatID};
         try {
@@ -37,8 +33,33 @@ public class CandidateDaoImpl implements CandidateMapper {
                     params,
                     new BeanPropertyRowMapper<Candidate>(Candidate.class));
         } catch (Exception e){
+            System.out.println(e.toString());
             return null;
         }
     }
 
+    @Override
+    public boolean updateEntityBySeatId(String seatID,Candidate candidate){
+        String sql = "insert into Main.candidate values(?,?,?,?,?) on duplicate key update beginTime=?,currentRound=?,userAsset=?,totalProfit=?";
+
+        Object[] params = new Object[]{
+                candidate.getSeatID(),
+                candidate.getBeginTime(),
+                candidate.getCurrentRound(),
+                candidate.getUserAsset(),
+                candidate.getTotalProfit(),
+                candidate.getBeginTime(),
+                candidate.getCurrentRound(),
+                candidate.getUserAsset(),
+                candidate.getTotalProfit(),
+                };
+        System.out.println(candidate);
+        try {
+            return jdbcTemplate.update(sql,
+                    params)>0;
+        } catch (Exception e){
+            System.out.println(e.toString());
+            return false;
+        }
+    }
 }

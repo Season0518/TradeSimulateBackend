@@ -1,0 +1,67 @@
+Date : 2022-11-26 00:38:09
+Directory : /Users/season/IdeaProjects/TradeExperment
+Total : 20 files,  721 codes, 126 comments, 178 blanks, all 1025 lines
+
+Languages
++----------------------+------------+------------+------------+------------+------------+
+| language             | files      | code       | comment    | blank      | total      |
++----------------------+------------+------------+------------+------------+------------+
+| Java                 |         15 |        524 |         68 |        126 |        718 |
+| Batch                |          1 |         96 |         51 |         36 |        183 |
+| XML                  |          1 |         90 |          1 |          9 |        100 |
+| Properties           |          2 |          9 |          6 |          4 |         19 |
+| source.markdown.math |          1 |          2 |          0 |          3 |          5 |
++----------------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                   |         20 |        721 |        126 |        178 |      1,025 |
+| .mvn                                                                                                                |          2 |         78 |         31 |         13 |        122 |
+| .mvn/wrapper                                                                                                        |          2 |         78 |         31 |         13 |        122 |
+| src                                                                                                                 |         15 |        455 |         43 |        117 |        615 |
+| src/main                                                                                                            |         14 |        446 |         43 |        112 |        601 |
+| src/main/java                                                                                                       |         13 |        439 |         37 |        109 |        585 |
+| src/main/java/com                                                                                                   |         13 |        439 |         37 |        109 |        585 |
+| src/main/java/com/ccut                                                                                              |         13 |        439 |         37 |        109 |        585 |
+| src/main/java/com/ccut/tradeexperment                                                                               |         13 |        439 |         37 |        109 |        585 |
+| src/main/java/com/ccut/tradeexperment/controller                                                                    |          2 |        191 |         10 |         52 |        253 |
+| src/main/java/com/ccut/tradeexperment/mapper                                                                        |          2 |         16 |          4 |          8 |         28 |
+| src/main/java/com/ccut/tradeexperment/pojo                                                                          |          3 |         41 |         10 |         11 |         62 |
+| src/main/java/com/ccut/tradeexperment/service                                                                       |          2 |        122 |          3 |         18 |        143 |
+| src/main/java/com/ccut/tradeexperment/util                                                                          |          3 |         58 |         10 |         15 |         83 |
+| src/main/resources                                                                                                  |          1 |          7 |          6 |          3 |         16 |
+| src/test                                                                                                            |          1 |          9 |          0 |          5 |         14 |
+| src/test/java                                                                                                       |          1 |          9 |          0 |          5 |         14 |
+| src/test/java/com                                                                                                   |          1 |          9 |          0 |          5 |         14 |
+| src/test/java/com/ccut                                                                                              |          1 |          9 |          0 |          5 |         14 |
+| src/test/java/com/ccut/tradeexperment                                                                               |          1 |          9 |          0 |          5 |         14 |
++---------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------------+----------------------+------------+------------+------------+------------+
+| filename                                                                                                            | language             | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------+----------------------+------------+------------+------------+------------+
+| /Users/season/IdeaProjects/TradeExperment/.mvn/wrapper/MavenWrapperDownloader.java                                  | Java                 |         76 |         31 |         12 |        119 |
+| /Users/season/IdeaProjects/TradeExperment/.mvn/wrapper/maven-wrapper.properties                                     | Properties           |          2 |          0 |          1 |          3 |
+| /Users/season/IdeaProjects/TradeExperment/README.md                                                                 | source.markdown.math |          2 |          0 |          3 |          5 |
+| /Users/season/IdeaProjects/TradeExperment/mvnw.cmd                                                                  | Batch                |         96 |         51 |         36 |        183 |
+| /Users/season/IdeaProjects/TradeExperment/pom.xml                                                                   | XML                  |         90 |          1 |          9 |        100 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/TradeExpermentApplication.java      | Java                 |         11 |          0 |          5 |         16 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/controller/CandidateController.java | Java                 |        132 |          5 |         33 |        170 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/controller/FundController.java      | Java                 |         59 |          5 |         19 |         83 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/mapper/CandidateMapper.java         | Java                 |          8 |          4 |          4 |         16 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/mapper/FundMapper.java              | Java                 |          8 |          0 |          4 |         12 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/pojo/Candidate.java                 | Java                 |         15 |          3 |          5 |         23 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/pojo/Fund.java                      | Java                 |         13 |          4 |          3 |         20 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/pojo/TradePolicy.java               | Java                 |         13 |          3 |          3 |         19 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/service/CandidateDaoImpl.java       | Java                 |         57 |          0 |          9 |         66 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/service/FundDaoImpl.java            | Java                 |         65 |          3 |          9 |         77 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/util/CalculateTools.java            | Java                 |         11 |          3 |          4 |         18 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/util/InitializeTools.java           | Java                 |         27 |          4 |          9 |         40 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/java/com/ccut/tradeexperment/util/ValidateTools.java             | Java                 |         20 |          3 |          2 |         25 |
+| /Users/season/IdeaProjects/TradeExperment/src/main/resources/application.properties                                 | Properties           |          7 |          6 |          3 |         16 |
+| /Users/season/IdeaProjects/TradeExperment/src/test/java/com/ccut/tradeexperment/TradeExpermentApplicationTests.java | Java                 |          9 |          0 |          5 |         14 |
+| Total                                                                                                               |                      |        721 |        126 |        178 |      1,025 |
++---------------------------------------------------------------------------------------------------------------------+----------------------+------------+------------+------------+------------+
