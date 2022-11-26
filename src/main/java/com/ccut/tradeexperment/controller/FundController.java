@@ -7,6 +7,7 @@ import com.ccut.tradeexperment.util.InitializeTools;
 import com.ccut.tradeexperment.util.ValidateTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,6 +23,7 @@ import java.util.Map;
 //        System.out.println(array[2]);
 
 @Controller
+@CrossOrigin
 public class FundController {
 
     @Autowired
@@ -45,7 +47,7 @@ public class FundController {
 
     @ResponseBody
     @RequestMapping("/api/queryTrend")
-    public Map<String,Object> getFundTrend(int fundID){
+    public Map<String,Object> getFundTrend(int fundID,String SeatID){
         Map<String,Object> response = new HashMap<String,Object>();
         Fund currentFund = fundDaoImpl.findEntityByFundId(fundID);
 

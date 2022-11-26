@@ -6,13 +6,11 @@ import com.ccut.tradeexperment.service.FundDaoImpl;
 import com.ccut.tradeexperment.util.ValidateTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.ccut.tradeexperment.service.CandidateDaoImpl;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +23,7 @@ import java.util.Map;
 
 
 @Controller
+@CrossOrigin
 public class CandidateController {
 
     @Autowired
@@ -107,7 +106,7 @@ public class CandidateController {
 
     @ResponseBody
     @PostMapping("/api/postStartTime")
-    public Map<String,Object> getBeginTime(String seatID, int startTime){
+    public Map<String,Object> getBeginTime(String seatID, long startTime){
         Map<String,Object> response = new HashMap<String,Object>();
         Candidate currentUser = candidateDaoImpl.findEntityBySeatId(seatID);
         System.out.println(currentUser.getSeatID());
@@ -153,6 +152,7 @@ public class CandidateController {
                 System.out.println(totalInvReward);
                 System.out.println("---");
             }
+
             currentUser.setUserAsset(currentUser.getUserAsset()+(totalInvReward-totalInvCost));
             currentUser.setTotalProfit(currentUser.getTotalProfit()+(totalInvReward-totalInvCost));
 
