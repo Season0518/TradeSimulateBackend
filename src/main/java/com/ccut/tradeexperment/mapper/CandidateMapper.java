@@ -12,4 +12,5 @@ public interface CandidateMapper{
     public List<Candidate> findAll();
     public Candidate findEntityBySeatId(String seatID);
     public boolean updateEntityBySeatId(String seatID,Candidate candidate);
+    public boolean createEntityBySeatId(String seatID,double userAsset);
 }

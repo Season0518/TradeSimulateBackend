@@ -1,6 +1,8 @@
 package com.ccut.tradeexperment.controller;
 
+import com.ccut.tradeexperment.pojo.Candidate;
 import com.ccut.tradeexperment.pojo.Fund;
+import com.ccut.tradeexperment.service.CandidateDaoImpl;
 import com.ccut.tradeexperment.service.FundDaoImpl;
 import com.ccut.tradeexperment.util.CalculateTools;
 import com.ccut.tradeexperment.util.InitializeTools;
@@ -8,6 +10,7 @@ import com.ccut.tradeexperment.util.ValidateTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,8 +32,12 @@ public class FundController {
     @Autowired
     private FundDaoImpl fundDaoImpl;
 
+    @Autowired
+    private CandidateDaoImpl candidateDaoImpl;
+
     @ResponseBody
     @RequestMapping("/api/description")
+    @CrossOrigin
     public Map<String,Object> postFundDescription(int fundID){
         Map<String,Object> response = new HashMap<String,Object>();
         Fund currentFund = fundDaoImpl.findEntityByFundId(fundID);
@@ -47,6 +54,7 @@ public class FundController {
 
     @ResponseBody
     @RequestMapping("/api/queryTrend")
+    @CrossOrigin
     public Map<String,Object> getFundTrend(int fundID,String SeatID){
         Map<String,Object> response = new HashMap<String,Object>();
         Fund currentFund = fundDaoImpl.findEntityByFundId(fundID);
@@ -66,7 +74,42 @@ public class FundController {
     }
 
     @ResponseBody
+    @RequestMapping("/api/queryTrend_v2")
+    @CrossOrigin
+    public Map<String,Object> getFundTrend_v2(@RequestBody Map<String, Object> requestBody){
+        Map<String,Object> response = new HashMap<String,Object>();
+
+        int fundID = (int)requestBody.get("fundID");
+        String seatID = (String) requestBody.get("seatID");
+
+        Fund currentFund = fundDaoImpl.findEntityByFundId(fundID);
+        Candidate currentUser = candidateDaoImpl.findEntityBySeatId(seatID);
+
+        final int MaxRound = 12;
+        double[] fundPrices = CalculateTools.calcFundPrice(currentFund.getDefaultValue(),currentFund.getFundRatios());
+
+        if(ValidateTools.isEntityValid(currentFund)&&ValidateTools.isEntityValid(currentUser)) {
+            double[] responsePrices = new double[currentUser.getCurrentRound()+1];
+            for(int i=0;i<=currentUser.getCurrentRound();i++){
+                responsePrices[i] = fundPrices[i];
+            }
+
+            response.put("isValid",true);
+            response.put("fundTrend",responsePrices);
+        }
+        else{
+            double[] responsePrices = new double[1];
+
+            response.put("isValid",false);
+            response.put("fundTrend",responsePrices);
+        }
+
+        return response;
+    }
+
+    @ResponseBody
     @RequestMapping("/api/initFund")
+    @CrossOrigin
     public Map<String,Object> initFundTrend(){
         Map<String,Object> response = new HashMap<String,Object>();
 

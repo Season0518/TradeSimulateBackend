@@ -16,7 +16,7 @@ public class InitializeTools {
         final double ascendIndex = 0.06;
         final double descendIndex= 0.05;
 
-        double[] fundTrend = new double[maximumRound+1];
+        double[] fundTrend = new double[maximumRound+3];
         fundTrend[0] = 100;
         for(int i=1;i<=maximumRound;i++){
             double fundValue = fundTrend[i-1]/100;
@@ -36,4 +36,5 @@ public class InitializeTools {
 
         return fund;
     }
+
 }

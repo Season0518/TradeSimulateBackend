@@ -19,4 +19,5 @@ public class Candidate {
     private int currentRound;
     private double userAsset;
     private double totalProfit;
+    private boolean isOccupy;
 }

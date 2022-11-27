@@ -33,6 +33,7 @@ public class CandidateController {
 
     @ResponseBody
     @RequestMapping("/api/login")
+    @CrossOrigin
     public Map<String,Object> postLoginStatus(String seatID){
         Map<String,Object> response = new HashMap<String,Object>();
         Candidate currentUser = candidateDaoImpl.findEntityBySeatId(seatID);
@@ -42,16 +43,33 @@ public class CandidateController {
             return response;
         }
         else {
-            response.put("isSeatValid", true);
+            if(currentUser.isOccupy()){
+                response.put("isSeatValid",false);
+            }
+            else{
+                response.put("isSeatValid", true);
+                currentUser.setOccupy(true);
+            }
         }
 
+        candidateDaoImpl.updateEntityBySeatId(currentUser.getSeatID(),currentUser);
         return response;
     }
+
+//    @ResponseBody
+//    @RequestMapping("/api/createCandidate")
+//    @CrossOrigin
+//    public Map<String,Object> cr(String seatID) {
+//
+//    }
+
+
 
     //RequestMapping用于接受前端的Param参数
 
     @ResponseBody
     @RequestMapping("/api/queryRound")
+    @CrossOrigin
     public Map<String,Object> postCurrentRound(String seatID){
         Map<String,Object> response = new HashMap<String,Object>();
         Candidate currentUser = candidateDaoImpl.findEntityBySeatId(seatID);
@@ -70,6 +88,7 @@ public class CandidateController {
 
     @ResponseBody
     @RequestMapping("/api/getAssets")
+    @CrossOrigin
     public Map<String,Object> postUserAssets(String seatID){
         Map<String,Object> response = new HashMap<String,Object>();
         Candidate currentUser = candidateDaoImpl.findEntityBySeatId(seatID);
@@ -88,6 +107,7 @@ public class CandidateController {
 
     @ResponseBody
     @RequestMapping("/api/queryStartTime")
+    @CrossOrigin
     public Map<String,Object> postBeginTime(String seatID){
         Map<String,Object> response = new HashMap<String,Object>();
         Candidate currentUser = candidateDaoImpl.findEntityBySeatId(seatID);
@@ -106,8 +126,13 @@ public class CandidateController {
 
     @ResponseBody
     @PostMapping("/api/postStartTime")
-    public Map<String,Object> getBeginTime(String seatID, long startTime){
+    @CrossOrigin
+    public Map<String,Object> getBeginTime(@RequestBody Map<String,Object> requestBody){
         Map<String,Object> response = new HashMap<String,Object>();
+
+        long startTime = Long.parseLong(requestBody.get("startTime").toString());
+        String seatID = (String)requestBody.get("seatID");
+
         Candidate currentUser = candidateDaoImpl.findEntityBySeatId(seatID);
         System.out.println(currentUser.getSeatID());
         System.out.println(startTime);
@@ -128,6 +153,7 @@ public class CandidateController {
 
     @ResponseBody
     @PostMapping("/api/submitPolicy")
+    @CrossOrigin
     public Map<String,Object> getTradePolicy(@RequestBody Map<String,Object> tradePolicy){
         Map<String,Object> response = new HashMap<String,Object>();
         Candidate currentUser = candidateDaoImpl.findEntityBySeatId((String)tradePolicy.get("seatID"));
@@ -136,6 +162,9 @@ public class CandidateController {
         List<Integer> invPolicies = (List)tradePolicy.get("invPolicy");
         double userCurrentAsset = currentUser.getUserAsset();
         int userCurrentRound = currentUser.getCurrentRound();
+
+        final int maxRound = 12;
+
         System.out.println(userCurrentAsset);
 
         if(ValidateTools.isEntityValid(currentUser)){
@@ -148,6 +177,7 @@ public class CandidateController {
             for(int i=0;i<invPolicies.size();i++){
                 totalInvCost += userCurrentAsset * (invPolicies.get(i)/100.0);
                 System.out.println(totalInvCost);
+                System.out.println(funds.size());
                 totalInvReward += (userCurrentAsset * (invPolicies.get(i)/100.0))*(funds.get(i).getFundRatios()[userCurrentRound]/100);
                 System.out.println(totalInvReward);
                 System.out.println("---");
@@ -160,6 +190,10 @@ public class CandidateController {
             response.put("totalAssets",currentUser.getUserAsset());
             response.put("currentProfit",totalInvReward-totalInvCost);
             response.put("totalProfit",currentUser.getTotalProfit());
+
+            if(currentUser.getCurrentRound()>maxRound){
+                currentUser.setOccupy(false);
+            }
 
             candidateDaoImpl.updateEntityBySeatId(currentUser.getSeatID(),currentUser);
         }

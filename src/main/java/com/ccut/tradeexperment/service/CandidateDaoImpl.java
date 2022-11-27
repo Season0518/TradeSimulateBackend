@@ -40,18 +40,16 @@ public class CandidateDaoImpl implements CandidateMapper {
 
     @Override
     public boolean updateEntityBySeatId(String seatID,Candidate candidate){
-        String sql = "insert into Main.candidate values(?,?,?,?,?) on duplicate key update beginTime=?,currentRound=?,userAsset=?,totalProfit=?";
+        String sql = "update Main.candidate set beginTime=?,currentRound=?,userAsset=?,totalProfit=?,isOccupy=? where seatID=?";
+
 
         Object[] params = new Object[]{
-                candidate.getSeatID(),
                 candidate.getBeginTime(),
                 candidate.getCurrentRound(),
                 candidate.getUserAsset(),
                 candidate.getTotalProfit(),
-                candidate.getBeginTime(),
-                candidate.getCurrentRound(),
-                candidate.getUserAsset(),
-                candidate.getTotalProfit(),
+                candidate.isOccupy(),
+                candidate.getSeatID()
                 };
         System.out.println(candidate);
         try {
@@ -59,6 +57,22 @@ public class CandidateDaoImpl implements CandidateMapper {
                     params)>0;
         } catch (Exception e){
             System.out.println(e.toString());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean createEntityBySeatId(String seatID,double userAsset){
+        String sql = "insert into candidate values(?,0,?,0,0,)";
+        Object[] params = new Object[]{
+                seatID,
+                userAsset
+        };
+
+        try{
+            return jdbcTemplate.update(sql,params)>0;
+        } catch (Exception e){
+            System.out.println("failed");
             return false;
         }
     }
